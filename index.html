@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Ngày Quốc Tế Phụ Nữ 8/3</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #ffc0cb;
+            background-image: linear-gradient(315deg, #ffc0cb 0%, #ff85a1 74%);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #container {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 10;
+            border: 4px solid #fff;
+        }
+
+        .card-content h2 {
+            color: #d81b60;
+            font-size: 22px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .card-content p {
+            font-size: 18px;
+            color: #444;
+            line-height: 1.6;
+            min-height: 80px;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: fall linear infinite;
+            top: -10%;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .btn-start {
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: #d81b60;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+            transition: 0.3s;
+        }
+        
+        .btn-start:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div class="card-content">
+            <h2 id="title-83"></h2>
+            <p id="text-83"></p>
+        </div>
+        <button class="btn-start" onclick="startApp()">Xem lời chúc ❤️</button>
+    </div>
+
+    <script>
+        const titleText = "HAPPY WOMEN'S DAY 8/3 🌸";
+        const messageText = "Mừng ngày 8/3! Chúc bạn luôn xinh đẹp, tự tin và thành công trên con đường mình chọn!\nYêu thương thật nhiều! 💖🌹✨";
+        
+        let tIndex = 0;
+        let mIndex = 0;
+        const titleBox = document.getElementById("title-83");
+        const textBox = document.getElementById("text-83");
+
+        function typeWriter() {
+            if (tIndex < titleText.length) {
+                titleBox.innerHTML += titleText.charAt(tIndex);
+                tIndex++;
+                setTimeout(typeWriter, 80);
+            } 
+            else if (mIndex < messageText.length) {
+                let char = messageText.charAt(mIndex);
+                textBox.innerHTML += char === "\n" ? "<br>" : char;
+                mIndex++;
+                setTimeout(typeWriter, 60);
+            }
+        }
+
+        function startApp() {
+            // Đã bỏ dòng audio.play()
+            document.querySelector('.btn-start').style.display = 'none';
+            typeWriter();
+            setInterval(createHeart, 300);
+        }
+
+        function createHeart() {
+            const heart = document.createElement("i");
+            heart.classList.add("fas", "fa-heart", "heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            heart.style.fontSize = Math.random() * 15 + 10 + "px";
+            heart.style.color = ["#ff4d6d", "#ff85a1", "#fd79a8", "#fab1a0"][Math.floor(Math.random() * 4)];
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
